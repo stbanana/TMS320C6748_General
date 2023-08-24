@@ -38,6 +38,7 @@
 									<listOptionValue builtIn="false" value="${PROJECT_ROOT}/3_ModuleCode/Include"/>
 									<listOptionValue builtIn="false" value="${PROJECT_ROOT}/4_Driver/Include"/>
 									<listOptionValue builtIn="false" value="${PROJECT_ROOT}/5_PhysicalChip/Cpu"/>
+									<listOptionValue builtIn="false" value="${PROJECT_ROOT}/5_PhysicalChip/Cpu/PinMuxSetup"/>
 									<listOptionValue builtIn="false" value="${PROJECT_ROOT}/5_PhysicalChip/TMS320C6x/Include"/>
 									<listOptionValue builtIn="false" value="${PROJECT_ROOT}/5_PhysicalChip/driverlib/inc"/>
 									<listOptionValue builtIn="false" value="${PROJECT_ROOT}/5_PhysicalChip/driverlib/Include"/>

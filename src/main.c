@@ -4,15 +4,7 @@
  * main.c
  */
 
-#include "hw_psc_C6748.h"
-#include "stdint.h"
-#include "soc_C6748.h"
-#include "interrupt.h"
-#include "lcdkC6748.h"
-#include "hw_types.h"
-#include "test_led.h"
-#include "uart.h"
-#include "psc.h"
+#include "Includes.h"
 
 /****************************************************************************/
 /*                      LOCAL FUNCTION PROTOTYPES                           */
@@ -36,8 +28,8 @@ int main(void)
     unsigned int config = 0;
 
     /* Enabling the PSC for UART1.*/
-    PSCModuleControl(SOC_PSC_1_REGS, HW_PSC_UART1, PSC_POWERDOMAIN_ALWAYS_ON,
-             PSC_MDCTL_NEXT_ENABLE);
+//    PSCModuleControl(SOC_PSC_1_REGS, HW_PSC_UART1, PSC_POWERDOMAIN_ALWAYS_ON,
+//             PSC_MDCTL_NEXT_ENABLE);
 
     /* Setup PINMUX */
 
@@ -76,6 +68,10 @@ int main(void)
 
     /* Enable the Interrupts in UART.*/
     UARTIntEnable(SOC_UART_1_REGS, intFlags);
+
+    InitCpu();     // 初始化芯片
+//    InitSysVar();  // 初始化常量
+//    InitSysPara(); // 初始化变量
 
     TEST_led();
 	return 0;

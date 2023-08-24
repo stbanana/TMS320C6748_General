@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "C:/ti/ti-cgt-c6000_8.3.2/lib",
+                "C:/ti/ti-cgt-c6000_8.3.2/include"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE",
+                "__TI_NO_PARALLEL_LOADS=1",
+                "_TMS320C6X"
+            ],
+            "compilerPath": "C:\\111_APPS\\MSYS2\\ucrt64\\bin\\gcc.exe",
+            "cStandard": "c17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "windows-gcc-x64"
+        }
+    ],
+    "version": 4
+}

@@ -37,7 +37,11 @@
 */
 
 #include <c6x.h>
+#include <debug.h>
 
+#include "hw_types.h"
+#include "hw_dspintc.h"
+#include "soc_C6748.h"
 #include "interrupt.h"
 
 

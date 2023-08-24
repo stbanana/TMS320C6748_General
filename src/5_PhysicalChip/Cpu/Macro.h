@@ -21,10 +21,4 @@
 // System clock rate, 120 MHz
 //#define SYSTEM_CLOCK    120000000U
 
-//#define   mhoLed0Off()            ROM_GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_0, 0)
-//#define   mhoLed0On()             ROM_GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_0, GPIO_PIN_0)
-//#define   mRS485Sts()             GPIOPinRead(GPIO_PORTD_BASE, GPIO_PIN_6)
-//#define   mhoRS485RxEnable()      ROM_GPIOPinWrite(GPIO_PORTD_BASE, GPIO_PIN_6, 0)
-//#define   mhoRS485TxEnable()      ROM_GPIOPinWrite(GPIO_PORTD_BASE, GPIO_PIN_6, 1)
-
 #endif /*_MACRO_H_ */

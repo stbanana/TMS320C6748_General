@@ -38,8 +38,8 @@
 #include "hw_types.h"
 #include "hw_dspintc.h"
 #include "interrupt.h"
-#include "soc_OMAPL138.h"
-#include "hw_syscfg0_OMAPL138.h"
+#include "soc_C6748.h"
+#include "hw_syscfg0_C6748.h"
 #include "timer.h"
 
 /* Scheduler includes */
