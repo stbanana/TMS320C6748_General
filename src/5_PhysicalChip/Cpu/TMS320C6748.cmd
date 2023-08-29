@@ -1,14 +1,13 @@
-/* =========================================================================*
- * RK6748_DSP.cmd - Linker Command File for Linking tms320c6748 DSP Programs	*
- * 																			*
- * These linker options are for command line linking only. For IDE linking, *
- * you should set your linker options in Project Properties.				*
- * 		-c					Link Using C Conventions						*
- *		-stack 	0x1000		Software Stack Size								*
- *		-heap	0x1000		Heap Area Size									*
- * =========================================================================*/
-
- MEMORY
+/****************************************************************************/
+/*                                                                          */
+/*              OMAPL138 及 DSP C6748 内存空间分配定义                      */
+/*                                                                          */
+/*              2014年07月05日                                              */
+/*                                                                          */
+/****************************************************************************/
+-stack          0x00001000 /* Stack Size */
+-heap           0x00001000 /* Heap Size */
+MEMORY
 {
 #ifdef DSP_CORE
 /****************************************************************************/
@@ -67,17 +66,17 @@
 
 SECTIONS
 {
-    .text:_c_int00	>  EntryPoint 				 /* 可执行代码 C 程序入口点*/
+    .text:_c_int00	>  0x11800000 				 /* 可执行代码 C 程序入口点*/
     .text			>  DDR2 				     /* 可执行代码 */
     .stack			>  DDR2 				     /* 软件系统栈 */
-    .bss			>  DDR2 				     /* 未初始化全局及静态变量 */
+
     .cio			>  DDR2                      /* C 输入输出缓存 */
     ".vectors"		>  Vector    				 /* 中断向量表 */
     .const			>  DDR2                      /* 常量 */
     .data			>  DDR2                      /* 已初始化全局及静态变量 */
     .switch			>  DDR2                      /* 跳转表 */
     .sysmem			>  DDR2                      /* 动态内存分配区域 */
-    .far			>  DDR2                      /* 远程全局及静态变量 */
+
     .args			>  DDR2
     .ppinfo			>  DDR2
     .ppdata			>  DDR2
@@ -89,11 +88,19 @@ SECTIONS
     /* EABI */
     .binit			>  DDR2
     .init_array		>  DDR2
-    .neardata		>  DDR2
     .fardata		>  DDR2
-    .rodata			>  DDR2
+
     .c6xabi.exidx	>  DDR2
     .c6xabi.extab	>  DDR2
+
+	.init_array     >  DDR2
+	GROUP(NEARDP_DATA)
+	{
+	   .neardata
+	   .rodata
+	   .bss
+	}               >  DDR2
+    .far: fill = 0x0, load > DDR2
 
 	/* DDR2 */
     .buffer			>  DDR2
@@ -103,52 +110,9 @@ SECTIONS
 	.Reg_uPP		>  uPP
 	.Reg_GPIO		>  GPIO
 	.Reg_McBSP1		>  McBSP1
+
+	.extram
+	  {
+	    . += 0x04000000;
+	  } load = DDR2, FILL=0x00000000, type=DSECT, START(EXTERNAL_RAM_START), END(EXTERNAL_RAM_END), SIZE(EXTERNAL_RAM_SIZE)
 }
-
-//-stack 0x100000
-// -heap 0x1000
-//-e fix_start
-/* =========================================================================*
- * 						Specify the System Memory Map						*
- * =========================================================================*/
-  /*
-MEMORY
-{
-    L1P:    o = 0x11E00000        l = 0x00008000
-    L1D:    o = 0x11F00000        l = 0x00008000
-    L2:     o = 0x11800000        l = 0x00040000
-    DDR2:   o = 0xC0000000        l = 0x08000000
-}
-
-// ============================================================================
-//                 Specify the Sections Allocation into Memory
-// ============================================================================
-
-
-SECTIONS
-{
-    .cinit        >        DDR2               // Initialization Tables
-    .pinit        >        DDR2               // Constructor Tables
-    .init_array   >        DDR2               //
-    .binit        >        DDR2               // Boot Tables
-    .const        >        DDR2               // Constant Data
-    .switch       >        DDR2               // Jump Tables
-    .text         >        DDR2               // Executable Code
-    .text:_c_int00: align=1024 > DDR2         // Entrypoint
-
-    GROUP (NEARDP_DATA)                       // group near data
-    {
-       .neardata
-       .rodata
-       .bss                                   // note: removed fill = 0
-    }             >        DDR2
-    .far: fill = 0x0, load > DDR2             // Far Global & Static Variables
-    .fardata      >        DDR2               // Far RW Data
-    .stack        >        DDR2               // Software System Stack
-    .sysmem       >        DDR2               // Dynamic Memory Allocation Area
-
-    .cio          >        DDR2               // C I/O Buffer
-    .vecs         >        DDR2               // Interrupt Vectors
-}
-*/
-

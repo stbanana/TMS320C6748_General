@@ -154,7 +154,7 @@ extern "C" {
 /* This is used to enable/disable Break Condition.*/
 #define UART_BREAK_CTRL                UART_LCR_BC
 
-/* This is used to enable/disable  Stick Parity Feature.*/
+/* 这是用来启用/禁用棒奇偶校验功能.*/
 #define UART_STICK_PARITY              UART_LCR_SP
 
 /* This is used to select Even Parity /Odd parity.*/
@@ -163,7 +163,7 @@ extern "C" {
 /* This is used to enable/disable Parity feature.*/
 #define UART_PARITY                    UART_LCR_PEN
 
-/* This is used to select single/multiple stop bits.*/
+/* 这用于选择单个/多个停止位。.*/
 #define UART_STOP_BIT                  UART_LCR_STB
 
 /* This can be used as a mask for word length selection bits.*/ 

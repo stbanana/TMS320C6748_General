@@ -9,10 +9,5 @@
 //-----------------------------------------------------------------------------
 // Public Function Prototypes
 //-----------------------------------------------------------------------------
-void LED_init(void);
-void LED1_ON(void);//LED1--GP2_4      
-void LED1_OFF(void);//LED1--GP2_4     
-void LED2_ON(void);//LED2--GP2_8  
-void LED2_OFF(void);//LED2--GP2_8  
-uint32_t TEST_led(void);
 
+void TaskLED(void* pvParameters);

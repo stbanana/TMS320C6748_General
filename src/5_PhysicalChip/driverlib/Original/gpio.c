@@ -67,6 +67,17 @@
  *           the pin as input and writing logic 0 as output. By default, all
  *           the pins are set as input pins.
  */
+    // 以下为各组 GPIO BANK 起始管脚对应值
+    // 范围 1-144
+    // GPIO0[0] 1
+    // GPIO1[0] 17
+    // GPIO2[0] 33
+    // GPIO3[0] 49
+    // GPIO4[0] 65
+    // GPIO5[0] 81
+    // GPIO6[0] 97
+    // GPIO7[0] 113
+    // GPIO8[0] 129
 void GPIODirModeSet(unsigned int baseAdd, unsigned int pinNumber, 
                     unsigned int pinDir)
 

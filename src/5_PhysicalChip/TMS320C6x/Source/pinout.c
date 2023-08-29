@@ -22,8 +22,7 @@
 //
 //*****************************************************************************
 
-#include <stdbool.h>
-#include <stdint.h>
+#include <Includes.h>
 
 //*****************************************************************************
 //
@@ -58,10 +57,14 @@ PinoutSet(void)
 {
 
 //    GPIOPinTypeGPIOOutput(GPIO_PORTN_BASE, GPIO_PIN_0 ); // LED_LIVE
-    GPIOBank0Pin0PinMuxSetup();
-    GPIOBank0Pin1PinMuxSetup();
-    GPIOBank0Pin2PinMuxSetup();
-    GPIOBank0Pin5PinMuxSetup();
+
+    GPIOBank6Pin12PinMuxSetup(); // LED_LIVE  核心板 GPIO6[12]
+
+    GPIOBank0Pin0PinMuxSetup(); // LED_LIVE  D7  GPIO0[0]
+
+    UARTPinMuxSetup(2, FALSE);//UART2系列pin口配置 禁用流控
+
+    uPPPinMuxSetup(uPP_CHA_8BIT_CHB_8BIT);  //uPP配置为A通道8bit B通道8bit
 }
 
 //*****************************************************************************

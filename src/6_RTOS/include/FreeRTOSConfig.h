@@ -42,6 +42,7 @@
 //#include "Macro.h"
 
 #define configCPU_CLOCK_HZ              120000000U
+//#define configCPU_CLOCK_HZ              456000000U
 #define configUSE_TICKLESS_IDLE         0
 #define configTICK_RATE_HZ              ( ( TickType_t ) 1000 )
 

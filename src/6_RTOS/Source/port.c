@@ -47,7 +47,7 @@
 #include "task.h"
 
 /* Constants. */
-#define portTMR_PERIOD_LSB32        ( 0x00024706 )                      /* TMR2 period msb for ~1ms     */
+#define portTMR_PERIOD_LSB32        ( 0x00037AA0 )                      /* TMR2 period msb for ~1ms     */
 #define portTMR_PERIOD_MSB32        ( 0x0 )                             /* TMR2 period lsb for ~1ms     */
 #define portINITIAL_ITSR            ( ( StackType_t ) 0x00000003 )      /* Init value for ITSR register.*/
 
@@ -56,6 +56,8 @@
 typedef void TCB_t;
 extern volatile TCB_t * volatile pxCurrentTCB;
 /*-----------------------------------------------------------*/
+
+
 
 /*
  * Sets up the periodic ISR used for the RTOS tick.
@@ -166,10 +168,12 @@ void vPortYieldInterruptClear(void)
 void vPortSetupTimerInterrupt(void)
 {
     /* Set the timer configuration. */
-    TimerConfigure(SOC_TMR_2_REGS, TMR_CFG_32BIT_UNCH_CLK_BOTH_INT);
+    TimerConfigure(SOC_TMR_2_REGS, TMR_CFG_64BIT_CLK_INT);
 
     /* Set the 64 bit timer period. */
     TimerPeriodSet(SOC_TMR_2_REGS, TMR_TIMER12, portTMR_PERIOD_LSB32);
+    TimerPeriodSet(SOC_TMR_2_REGS, TMR_TIMER34, portTMR_PERIOD_MSB32);
+
 
     /* Map Timer interrupts to DSP maskable interrupt. */
     vPortIntEventMap(portTICK_INT_MASK, SYS_INT_T64P2_TINTALL);
@@ -303,6 +307,7 @@ portBASE_TYPE xPortStartScheduler(void)
 {
     extern void vPortSartFirstTask(void);
 
+#define  APP_INIT_INTC
 #ifndef APP_INIT_INTC
     /*
      *  Setup the DSP Interrupt Controller (INTC).

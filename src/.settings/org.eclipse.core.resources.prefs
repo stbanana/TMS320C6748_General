@@ -1,8 +1,14 @@
 eclipse.preferences.version=1
 encoding//Debug/1_App/Source/subdir_rules.mk=UTF-8
 encoding//Debug/1_App/Source/subdir_vars.mk=UTF-8
+encoding//Debug/4_Driver/HWLib/Key/subdir_rules.mk=UTF-8
+encoding//Debug/4_Driver/HWLib/Key/subdir_vars.mk=UTF-8
+encoding//Debug/4_Driver/HWLib/LED/subdir_rules.mk=UTF-8
+encoding//Debug/4_Driver/HWLib/LED/subdir_vars.mk=UTF-8
 encoding//Debug/4_Driver/Source/subdir_rules.mk=UTF-8
 encoding//Debug/4_Driver/Source/subdir_vars.mk=UTF-8
+encoding//Debug/4_Driver/uPPInterior/subdir_rules.mk=UTF-8
+encoding//Debug/4_Driver/uPPInterior/subdir_vars.mk=UTF-8
 encoding//Debug/5_PhysicalChip/Cpu/PinMuxSetup/subdir_rules.mk=UTF-8
 encoding//Debug/5_PhysicalChip/Cpu/PinMuxSetup/subdir_vars.mk=UTF-8
 encoding//Debug/5_PhysicalChip/Cpu/subdir_rules.mk=UTF-8

@@ -24,8 +24,10 @@
 	.global _c674x_mask_int11_isr
 	.global _c674x_mask_int12_isr
 	.global _c674x_mask_int13_isr
-	.global _c674x_mask_int14_isr
-	.global _c674x_mask_int15_isr
+	;;.global _c674x_mask_int14_isr
+	;;.global _c674x_mask_int15_isr
+	.global _vPortYieldISR
+	.global _vPortTickISR
 
 ;**********************************************************
 ;				Interrupt Fetch Packet
@@ -60,5 +62,7 @@ _intcVectorTable:
 	VEC_ENTRY _c674x_mask_int11_isr
 	VEC_ENTRY _c674x_mask_int12_isr
 	VEC_ENTRY _c674x_mask_int13_isr
-	VEC_ENTRY _c674x_mask_int14_isr
-	VEC_ENTRY _c674x_mask_int15_isr
+	;;VEC_ENTRY _c674x_mask_int14_isr
+	;;VEC_ENTRY _c674x_mask_int15_isr
+	VEC_ENTRY _vPortYieldISR
+	VEC_ENTRY _vPortTickISR

@@ -109,7 +109,34 @@ extern "C" {
 #define GPIO_BANK_PIN_14             GPIO_DIR_DIR14
 #define GPIO_BANK_PIN_15             GPIO_DIR_DIR15
 
+/*GPIB不同BANK号的起始引脚号 作为引脚号基值*/
+#define GPIO_BANK_BASE_0            ( 0*16 )
+#define GPIO_BANK_BASE_1            ( 1*16 )
+#define GPIO_BANK_BASE_2            ( 2*16 )
+#define GPIO_BANK_BASE_3            ( 3*16 )
+#define GPIO_BANK_BASE_4            ( 4*16 )
+#define GPIO_BANK_BASE_5            ( 5*16 )
+#define GPIO_BANK_BASE_6            ( 6*16 )
+#define GPIO_BANK_BASE_7            ( 7*16 )
+#define GPIO_BANK_BASE_8            ( 8*16 )
 
+/*GPIO不同PIN号的引脚号附加值*/
+#define GPIO_PIN_ADDTL_0            ( 1 )
+#define GPIO_PIN_ADDTL_1            ( 2 )
+#define GPIO_PIN_ADDTL_2            ( 3 )
+#define GPIO_PIN_ADDTL_3            ( 4 )
+#define GPIO_PIN_ADDTL_4            ( 5 )
+#define GPIO_PIN_ADDTL_5            ( 6 )
+#define GPIO_PIN_ADDTL_6            ( 7 )
+#define GPIO_PIN_ADDTL_7            ( 8 )
+#define GPIO_PIN_ADDTL_8            ( 9 )
+#define GPIO_PIN_ADDTL_9            ( 10 )
+#define GPIO_PIN_ADDTL_10           ( 11 )
+#define GPIO_PIN_ADDTL_11           ( 12 )
+#define GPIO_PIN_ADDTL_12           ( 13 )
+#define GPIO_PIN_ADDTL_13           ( 14 )
+#define GPIO_PIN_ADDTL_14           ( 15 )
+#define GPIO_PIN_ADDTL_15           ( 16 )
 
 /*****************************************************************************
 **                   FUNCTION DECLARATIONS                                   
@@ -137,19 +164,4 @@ void GPIOBankPinsWrite(unsigned int baseAdd, unsigned int bankNumber,
 }
 #endif
 #endif
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
