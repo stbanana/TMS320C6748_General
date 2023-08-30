@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"*.c": "c",
+			"hw_psc_c6748.h": "c",
+			"lcdkc6748.h": "c",
+			"soc_c6748.h": "c"
+		}
+	}
+}
