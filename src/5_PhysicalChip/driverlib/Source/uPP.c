@@ -12,6 +12,10 @@
 /*              2015Äê04ÔÂ19ÈÕ                                              */
 /*                                                                          */
 /****************************************************************************/
+
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "hw_upp.h"
 #include "debug.h"
 #include "hw_types.h"
@@ -20,8 +24,7 @@
 #include "soc_C6748.h"
 #include "hw_syscfg0_C6748.h"
 
-#include <stdio.h>
-#include <stdlib.h>
+
 
 /****************************************************************************/
 /*                                                                          */

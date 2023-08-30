@@ -17,7 +17,7 @@
 //头文件名称通用，函数名称通用，内部实现不同
 #include <gpio.h>
 #include <uart.h>
-#include <upp.h>
+#include <uPP.h>
 #include <dspcache.h>
 
 /*MCU专用头文件*/
@@ -45,6 +45,8 @@
 
 /*程序初始化函数*/
 #include <InitCpu.h>
+#include <InitSysVar.h>
+#include <InitSysPara.h>
 #include <pinout.h>
 
 /*FreeRTOS*/

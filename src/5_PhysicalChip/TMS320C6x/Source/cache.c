@@ -184,7 +184,9 @@ void CacheEnable (unsigned int memCfg)
     /* End of critical section - restore interrupts */
     IntGlobalRestore(restoreVal);
 }
- 
+
+//memory data register主存数据寄存器用来缓存从主存中读取的数据（包括指令）。
+//memory address register主存地址寄存器用来读取主存时缓存地址。
 void CacheEnableMAR (unsigned int baseAddr, unsigned int byteSize)
 {
     unsigned int maxAddr, firstMar, lastMar, marNum;

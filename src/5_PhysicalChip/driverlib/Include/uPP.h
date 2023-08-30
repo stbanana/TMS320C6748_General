@@ -109,7 +109,7 @@ typedef struct
 {
 	// DMA 窗口地址高 29 位（低 3 位必须为 0 ，强制 64 位对齐）
 	unsigned int *WindowAddress;
-	// 取值范围 0x001-0xFFFF
+	// DMA行数 取值范围 0x001-0xFFFF
 	unsigned short LineCount;
     // DMA 行字节数目高 15 位（第 0 位必须为 0 ，强制为偶数）取值范围 0x001-0x7FFF
 	unsigned short ByteCount;
@@ -121,17 +121,17 @@ typedef struct
 typedef struct
 {
 	// DMA 当前窗口地址
-	unsigned int WindowAddress;
+	unsigned int WindowAddress; //0-FFFFFFFF
 	// 当前行数
-	unsigned short LineCount;
+	unsigned short LineCount;   //0-FFFF
 	// 当前字节数
-	unsigned short ByteCount;
+	unsigned short ByteCount;   //0-FFFF
 	// FIFO 使用状况
-	unsigned char FIFO;
+	unsigned char FIFO; //0-F 记录在任何事务期间达到的最大FIFO块占用率
 	// DMA 等待中传输（当 DMA 通道空闲时才能够启动新的 DMA 传输）
-	unsigned char PEND;
+	unsigned char PEND; //0：没有等待转移。可以编写通道 I 描述符 1：转移待定。通道 I 描述符可能不写入。
 	// DMA 状态
-	unsigned char DMA;
+	unsigned char DMA;  //0：DMA 处于非活动状态 1：DMA 处于活动状态
 } uPPDMAStatus;
 
 /****************************************************************************/

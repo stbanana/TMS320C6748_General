@@ -46,7 +46,6 @@
 // pointers to control them.
 //
 //*****************************************************************************
-#ifdef UART_BUFFERED
 
 // 创建发送BUFFER
 static unsigned char g_pcUARTTxBuffer[UART_BUFFER_ID_SIZE][UART_TX_BUFFER_SIZE];
@@ -58,16 +57,14 @@ static unsigned char g_pcUARTRxBuffer[UART_BUFFER_ID_SIZE][UART_RX_BUFFER_SIZE];
 static volatile uint32_t g_ui32UARTRxWriteIndex[UART_BUFFER_ID_SIZE];
 static volatile uint32_t g_ui32UARTRxReadIndex[UART_BUFFER_ID_SIZE];
 
-
 ////BUFFER顶设置
 #define ADVANCE_TX_BUFFER_INDEX(Index)  (Index) = ((Index) + 1) % UART_TX_BUFFER_SIZE
 #define ADVANCE_RX_BUFFER_INDEX(Index)  (Index) = ((Index) + 1) % UART_RX_BUFFER_SIZE
-#endif
 
 /*以下二者需要在UARTStdioConfig函数中配置*/
 // 标志使用的UART基址.
 static uint32_t g_ui32Base[UART_BUFFER_ID_SIZE];
-// 标准使用的UART中断号
+// 标志使用的UART中断号
 static uint32_t g_ui32UARTInt[UART_BUFFER_ID_SIZE];
 
 //*****************************************************************************
@@ -85,7 +82,6 @@ static const uint32_t g_ui32UARTBase[UART_BUFFER_ID_SIZE] =
 //! 确认BUFFER是否为满
 //! \return 返回是/否(bool)
 //*****************************************************************************
-#ifdef UART_BUFFERED
 static bool
 IsTxBufferFull(uint32_t PortNum)
 {
@@ -108,14 +104,12 @@ IsRxBufferFull(uint32_t PortNum)
 
     return ((((ui32Write + 1) % UART_RX_BUFFER_SIZE) == ui32Read) ? true : false);
 }
-#endif
 
 //*****************************************************************************
 //! \param PortNum UART号
 //! 确认BUFFER是否为空
 //! \return 返回是/否(bool)
 //*****************************************************************************
-#ifdef UART_BUFFERED
 static bool IsTxBufferEmpty(uint32_t PortNum)
 {
     uint32_t ui32Write;
@@ -136,14 +130,12 @@ static bool IsRxBufferEmpty(uint32_t PortNum)
 
     return ((ui32Write == ui32Read) ? true : false);
 }
-#endif
 
 //*****************************************************************************
 //! \param PortNum UART号
 //! 确认BUFFER中的字节数
 //! \return 返回字节数(32位)
 //*****************************************************************************
-#ifdef UART_BUFFERED
 static uint32_t
 GetTxBufferCount(uint32_t PortNum)
 {
@@ -169,13 +161,13 @@ GetRxBufferCount(uint32_t PortNum)
     return ((ui32Write >= ui32Read) ? (ui32Write - ui32Read) :
             (UART_RX_BUFFER_SIZE - (ui32Read - ui32Write)));
 }
-#endif
+
 //*****************************************************************************
 //! \param PortNum UART号
 //! 确认BUFFER中空余的字节数 (暂无使用)
 //! \return 返回字节数(32位)
 //*****************************************************************************
-#ifdef UART_BUFFERED
+
 static uint32_t
 GetTxBufferFreeCount(uint32_t PortNum)
 {
@@ -187,14 +179,14 @@ GetTxBufferFreeCount(uint32_t PortNum)
 //{
 //    return (UART_RX_BUFFER_SIZE-GetRxBufferCount(PortNum));
 //}
-#endif
+
 //*****************************************************************************
 //
 // Take as many bytes from the transmit buffer as we have space for and move
 // them into the UART transmit FIFO.
 //
 //*****************************************************************************
-#ifdef UART_BUFFERED
+
 static void
 UARTPrimeTransmit(uint32_t ui32Base, uint32_t PortNum)
 {
@@ -211,7 +203,6 @@ UARTPrimeTransmit(uint32_t ui32Base, uint32_t PortNum)
     }
 }
 
-#endif
 
 //*****************************************************************************
 //
@@ -408,7 +399,6 @@ UARTgetc(uint8_t *data_rx,uint32_t PortNum)
 //*****************************************************************************
 //! 初始化Num号UART的接收BUFFER
 //*****************************************************************************
-#if defined(UART_BUFFERED) || defined(DOXYGEN)
 void
 UARTFlushRx(uint8_t PortNum)       //  清BUFFER
 {
@@ -416,12 +406,10 @@ UARTFlushRx(uint8_t PortNum)       //  清BUFFER
     g_ui32UARTRxWriteIndex[PortNum] = 0;
 
 }
-#endif
 
 //*****************************************************************************
 //! 初始化Num号UART的发送BUFFER
 //*****************************************************************************
-#if defined(UART_BUFFERED) || defined(DOXYGEN)
 void
 UARTFlushTx(bool bDiscard, uint32_t PortNum)
 {
@@ -440,7 +428,6 @@ UARTFlushTx(bool bDiscard, uint32_t PortNum)
         }
     }
 }
-#endif
 
 
 //*****************************************************************************
@@ -455,7 +442,6 @@ UARTFlushTx(bool bDiscard, uint32_t PortNum)
 //! \return None.
 //
 //*****************************************************************************
-#if defined(UART_BUFFERED) || defined(DOXYGEN)
 void
 UART2StdioIntHandler(void)  //此为void UART2中断
 {
@@ -466,7 +452,7 @@ UART2StdioIntHandler(void)  //此为void UART2中断
     ui32Ints = UARTIntStatus(SOC_UART_2_REGS);       // 确定中断源
     IntEventClear(SYS_INT_UART2_INT);                // 清除 UART2 系统中断
 
-    if (ui32Ints & UART_INTID_TX_EMPTY)                             //  确认发送FIFO
+    if (ui32Ints & UART_INTID_TX_EMPTY)             //  确认发送FIFO
     {
         UARTPrimeTransmit(g_ui32Base[2], 2);
         if (IsTxBufferEmpty(2))
@@ -493,7 +479,7 @@ UART2StdioIntHandler(void)  //此为void UART2中断
         UARTIntEnable(g_ui32Base[2], UART_INT_TX_EMPTY);     // 开当前UART[Num]中断
     }
 }
-#endif
+
 //*****************************************************************************
 //
 // Close the Doxygen group.

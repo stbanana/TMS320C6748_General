@@ -19,20 +19,11 @@
 // Public Function Definitions
 //-----------------------------------------------------------------------------
 
-//-----------------------------------------------------------------------------
-// \brief   tests the leds and pushbuttons. lights each led.
-//          prints message to stdout for pushbutton changes.
-//
-// \param   none.
-//
-// \return  uint32_t
-//-----------------------------------------------------------------------------
-
 void TaskLED(void* pvParameters)
 {
     while (1)
     {
-//        UARTwrite("hellow", sizeof("hellow"), 2);
+        UARTwrite("Hello", sizeof("Hello"), 2);
         LifeLedSwitch();
         vTaskDelay(500);
     }

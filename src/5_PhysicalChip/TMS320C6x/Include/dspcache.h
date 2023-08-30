@@ -91,9 +91,9 @@ extern void CacheDisableMAR (unsigned int baseAddr, unsigned int byteSize);
 extern void CacheInvL1pAll (void);
 extern void CacheWBAll (void);
 extern void CacheWBInvAll (void);
-extern void CacheInv (unsigned int baseAddr, unsigned int byteSize);
-extern void CacheWB (unsigned int baseAddr, unsigned int byteSize);
-extern void CacheWBInv (unsigned int baseAddr, unsigned int byteSize);
+extern void CacheInv (unsigned int baseAddr, unsigned int byteSize);            //清除cache line的valid 比特，使cache line中缓存的buffer无效
+extern void CacheWB (unsigned int baseAddr, unsigned int byteSize);             //把cache中的dirty line回写到memory
+extern void CacheWBInv (unsigned int baseAddr, unsigned int byteSize);          //回写并清除
 
 #ifdef __cplusplus
 }

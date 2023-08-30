@@ -38,19 +38,12 @@ extern "C"
 {
 #endif
 
-// In buffered mode, we only allow a single instance to be opened.
-#define UART_BUFFERED   1
-//配置UART的中断号    0为缺省 未启用
-#define INT_UART0   0x00
-#define INT_UART1   0x00
-#define INT_UART2   C674X_MASK_INT4
 //*****************************************************************************
 //
 // If built for buffered operation, the following labels define the sizes of
 // the transmit and receive buffers respectively.
 //
 //*****************************************************************************
-#ifdef UART_BUFFERED
 #ifndef UART_RX_BUFFER_SIZE
 #define UART_RX_BUFFER_SIZE     256
 #endif
@@ -60,7 +53,7 @@ extern "C"
 #ifndef UART_BUFFER_ID_SIZE
 #define UART_BUFFER_ID_SIZE     3
 #endif
-#endif
+
 #define     cQ_BUFF_NORMAL              0
 #define     cQ_BUFF_FULL                1
 #define     cQ_BUFF_EMPTY               2
@@ -74,14 +67,14 @@ extern void UARTStdioConfig(uint32_t ui32Port, uint32_t ui32IntNum, uint32_t ui3
 extern int UARTgets(uint8_t *pcBuf, uint32_t ui32Len,uint32_t PortNum);
 extern unsigned char UARTgetc(uint8_t *data_rx,uint32_t PortNum);
 extern int UARTwrite(const uint8_t *pcBuf, uint32_t ui32Len, uint32_t PortNum);
-#ifdef UART_BUFFERED
+
 extern int UARTPeek(unsigned char ucChar);
 extern void UARTFlushTx(bool bDiscard, uint32_t PortNum);
 extern void UARTFlushRx(uint8_t PortNum);
 extern int UARTRxBytesAvail(void);
 extern int UARTTxBytesFree(void);
 extern void UARTEchoSet(bool bEnable);
-#endif
+
 
 extern void UART2StdioIntHandler(void);
 
