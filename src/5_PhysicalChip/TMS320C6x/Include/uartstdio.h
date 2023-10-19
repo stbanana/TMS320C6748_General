@@ -75,7 +75,7 @@ extern int UARTRxBytesAvail(void);
 extern int UARTTxBytesFree(void);
 extern void UARTEchoSet(bool bEnable);
 
-
+extern void UART1StdioIntHandler(void);
 extern void UART2StdioIntHandler(void);
 
 //*****************************************************************************

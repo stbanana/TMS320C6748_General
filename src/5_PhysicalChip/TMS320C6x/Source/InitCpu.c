@@ -58,10 +58,12 @@ void InitCpu(void)
 
 static void PSCInit(void)
 {
+    PSCModuleControl(SOC_PSC_0_REGS, HW_PSC_CC0, PSC_POWERDOMAIN_ALWAYS_ON, PSC_MDCTL_NEXT_ENABLE);    // 使能 Channel Controller 0 模块 支持DMA通道
+    PSCModuleControl(SOC_PSC_1_REGS, HW_PSC_CC1, PSC_POWERDOMAIN_ALWAYS_ON, PSC_MDCTL_NEXT_ENABLE);    // 使能 Channel Controller 0 模块 支持DMA通道
     PSCModuleControl(SOC_PSC_1_REGS, HW_PSC_TC2, PSC_POWERDOMAIN_ALWAYS_ON, PSC_MDCTL_NEXT_ENABLE);    // 使能 tc2 模块 freertos的支持定时器
     PSCModuleControl(SOC_PSC_1_REGS, HW_PSC_GPIO, PSC_POWERDOMAIN_ALWAYS_ON, PSC_MDCTL_NEXT_ENABLE);    // 使能 GPIO 模块
     PSCModuleControl(SOC_PSC_1_REGS, HW_PSC_UART2, PSC_POWERDOMAIN_ALWAYS_ON, PSC_MDCTL_NEXT_ENABLE);   // 使能 UART2 模块
-    PSCModuleControl(SOC_PSC_1_REGS, HW_PSC_UPP, PSC_POWERDOMAIN_ALWAYS_ON, PSC_MDCTL_NEXT_ENABLE);     // 使能 Upp 模块
+    PSCModuleControl(SOC_PSC_1_REGS, HW_PSC_UPP, PSC_POWERDOMAIN_ALWAYS_ON, PSC_MDCTL_NEXT_ENABLE);     // 使能 uPP 模块
 }
 
 void CaCheInit(void)
@@ -79,10 +81,10 @@ void InterruptInit(void)
 //    IntRegister(portTICK_INT_MASK, _vPortTickISR);      //rtos的支持中断 进程切换    占用15号中断
 //    IntRegister(portYIELD_INT_MASK, _vPortYieldISR);    //rtos的支持中断 定时器2     占用14号中断
 
-    /* 绑定UART2中断函数 */
-    IntRegister(C674X_MASK_UART2, UART2StdioIntHandler);
-    IntEventMap(C674X_MASK_UART2, SYS_INT_UART2_INT);
-    IntEnable(C674X_MASK_UART2);
+    /* 绑定UART1中断函数 */
+    IntRegister(C674X_MASK_UART1, UART1StdioIntHandler);
+    IntEventMap(C674X_MASK_UART1, SYS_INT_UART1_INT);
+    IntEnable(C674X_MASK_UART1);
 
     /* 绑定uPP中断函数 */
     IntRegister(C674X_MASK_INT5, uPPIsr);
@@ -96,27 +98,27 @@ static void GPIOInit(void)
     GPIODirModeSet(SOC_GPIO_0_REGS, GPIO_BANK_BASE_6+GPIO_PIN_ADDTL_12, GPIO_DIR_OUTPUT);   // GPIO6[12]
 
     /* 底板 LED */
-    GPIODirModeSet(SOC_GPIO_0_REGS, GPIO_BANK_BASE_0+GPIO_PIN_ADDTL_0, GPIO_DIR_OUTPUT);    // GPIO0[0]     D7
+//    GPIODirModeSet(SOC_GPIO_0_REGS, GPIO_BANK_BASE_0+GPIO_PIN_ADDTL_0, GPIO_DIR_OUTPUT);    // GPIO0[0]     D7
 }
 
 static void UARTInit(void)
 {
     /* UART2 */
-    UARTStdioConfig(2, C674X_MASK_UART2, BAUD_115200, UART_2_FREQ);
+    UARTStdioConfig(1, C674X_MASK_UART1, BAUD_115200, UART_1_FREQ);
 }
 
 static void uPPInit(void)
 {
     /* uPP数据格式配置 */
-    uPPDataFmtConfig(SOC_UPP_0_REGS, uPP_CHA, uPP_DataPackingFmt_LJZE | uPP_DataPacking_FULL
-                            | uPP_InterfaceWidth_8BIT | uPP_DataRate_SINGLE);
+//    uPPDataFmtConfig(SOC_UPP_0_REGS, uPP_CHA, uPP_DataPackingFmt_LJZE | uPP_DataPacking_FULL
+//                            | uPP_InterfaceWidth_8BIT | uPP_DataRate_SINGLE);
     uPPDataFmtConfig(SOC_UPP_0_REGS, uPP_CHB, uPP_DataPackingFmt_LJZE | uPP_DataPacking_FULL
-                            | uPP_InterfaceWidth_8BIT | uPP_DataRate_SINGLE);
+                            | uPP_InterfaceWidth_16BIT | uPP_DataRate_SINGLE);
     /* uPP通道配置 */
-    uPPChannelConfig(SOC_UPP_0_REGS, uPP_DDRDEMUX_DISABLE | uPP_SDRTXIL_DISABLE | uPP_CHN_TWO
-                                | uPP_DUPLEX0);
+    uPPChannelConfig(SOC_UPP_0_REGS, uPP_DDRDEMUX_DISABLE | uPP_SDRTXIL_DISABLE | uPP_CHN_ONE
+                                | uPP_ALL_RECEIVE);
     /* uPP引脚配置 */
-    uPPPinConfig(SOC_UPP_0_REGS, uPP_CHA, uPP_PIN_TRIS | uPP_PIN_ENABLE | uPP_PIN_WAIT | uPP_PIN_START);
+//    uPPPinConfig(SOC_UPP_0_REGS, uPP_CHA, uPP_PIN_TRIS | uPP_PIN_ENABLE | uPP_PIN_WAIT | uPP_PIN_START);
     uPPPinConfig(SOC_UPP_0_REGS, uPP_CHB, uPP_PIN_ENABLE | uPP_PIN_WAIT | uPP_PIN_START);
     /* uPP时钟配置 */
     uPPClkConfig(SOC_UPP_0_REGS, uPP_CHB, 57000000, UPP_FREQ, uPP_PIN_PHASE_NORMAL);

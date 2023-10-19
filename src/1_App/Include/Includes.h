@@ -24,12 +24,11 @@
 //厂商提供
 #include <psc.h>        //实际上即是 #include <hw_psc_C6748.h>
 #include <soc_C6748.h>
-#include <lcdkC6748.h>
 #include <interrupt.h>
 #include <hw_types.h>
 //自写提供
 #include <Macro.h>
-#include <PinMuxSetup.h>
+#include <PinMuxSetup.h>    //#include <lcdkC6748.h>并入PinMuxSetup.h 并有所拓展
 #include <uartstdio.h>
 #include <uPPstdio.h>
 

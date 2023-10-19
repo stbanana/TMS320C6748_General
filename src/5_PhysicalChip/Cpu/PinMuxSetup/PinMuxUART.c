@@ -1,10 +1,18 @@
-/****************************************************************************/
-/*                                                                          */
-/*              创龙 DSP6748 开发板相关函数                                 */
-/*                                                                          */
-/*              2014年07月12日                                              */
-/*                                                                          */
-/****************************************************************************/
+/********************************************************************************
+
+
+ **** Copyright (C), 2020, Shenzhen SKONDA ELECTRONIC LTD  ****
+
+
+ ********************************************************************************
+ * File Name     : PinMuxUART.c
+ * Author        : SKONDA
+ * Date          : 2023-06-30
+ * Version       : 1.0
+********************************************************************************/
+/**************************************************************************/
+/*UART的引脚配置，改变Mux的函数*/
+#include <stdint.h>
 #include "hw_types.h"
 
 #include "PinMuxSetup.h"
@@ -61,12 +69,13 @@
 /*              管脚复用配置                                                */
 /*                                                                          */
 /****************************************************************************/
-void UARTPinMuxSetup(unsigned int instanceNum, unsigned int modemCtrlChoice)
+// 若modemCtrlChoice为FALSE,则禁用流控，少配置两个流控引脚，仅有读写两个引脚
+void UARTPinMuxSetup(uint32_t ui32PortNum, uint32_t modemCtrlChoice)
 {
-    unsigned int svPinMuxRtsCts = 0;
-    unsigned int svPinMuxTxdRxd = 0;
+    uint32_t svPinMuxRtsCts = 0;
+    uint32_t svPinMuxTxdRxd = 0;
 
-    if(0 == instanceNum)
+    if(0 == ui32PortNum)
     {
           if(TRUE == modemCtrlChoice)
           {
@@ -90,7 +99,7 @@ void UARTPinMuxSetup(unsigned int instanceNum, unsigned int modemCtrlChoice)
                 svPinMuxTxdRxd);
      }
 
-     else if(1 == instanceNum)
+     else if(1 == ui32PortNum)
      {
           if(TRUE == modemCtrlChoice)
           {
@@ -114,7 +123,7 @@ void UARTPinMuxSetup(unsigned int instanceNum, unsigned int modemCtrlChoice)
                 svPinMuxTxdRxd);
     }      
                        
-     else if(2 == instanceNum)
+     else if(2 == ui32PortNum)
      {
 
           if(TRUE == modemCtrlChoice)

@@ -23,7 +23,7 @@ void TaskLED(void* pvParameters)
 {
     while (1)
     {
-        UARTwrite("Hello", sizeof("Hello"), 2);
+//        UARTwrite("Hello", sizeof("Hello"), 2);
         LifeLedSwitch();
         vTaskDelay(500);
     }

@@ -443,6 +443,44 @@ UARTFlushTx(bool bDiscard, uint32_t PortNum)
 //
 //*****************************************************************************
 void
+UART1StdioIntHandler(void)  //此为void UART1中断
+{
+
+    uint32_t ui32Ints;
+    int32_t i32Char;
+
+    ui32Ints = UARTIntStatus(SOC_UART_1_REGS);       // 确定中断源
+    IntEventClear(SYS_INT_UART1_INT);                // 清除 UART2 系统中断
+
+    if (ui32Ints & UART_INTID_TX_EMPTY)             //  确认发送FIFO
+    {
+        UARTPrimeTransmit(g_ui32Base[1], 1);
+        if (IsTxBufferEmpty(1))
+        {
+            UARTIntDisable(g_ui32Base[1], UART_INT_TX_EMPTY);
+        }
+    }
+
+    if (ui32Ints & UART_INTID_RX_DATA)            // 确认接收FIFO
+    {
+        while (UARTCharsAvail(g_ui32Base[1]))              // 从当前UART[Num]获取数据
+        {
+            i32Char = UARTCharGetNonBlocking(SOC_UART_1_REGS);   //设定非阻塞
+            if (!IsRxBufferFull(1))
+            {
+                g_pcUARTRxBuffer[1][g_ui32UARTRxWriteIndex[1]] =
+                    (unsigned char)(i32Char & 0xFF);
+                ADVANCE_RX_BUFFER_INDEX(g_ui32UARTRxWriteIndex[1]);    //设定BUFFER顶
+
+            }
+        }
+
+        UARTPrimeTransmit(g_ui32Base[1], 1);                  // 发送TXBUFFER
+        UARTIntEnable(g_ui32Base[1], UART_INT_TX_EMPTY);     // 开当前UART[Num]中断
+    }
+}
+
+void
 UART2StdioIntHandler(void)  //此为void UART2中断
 {
 

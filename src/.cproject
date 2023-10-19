@@ -90,7 +90,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="5_PhysicalChip/driverlib/Original" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="5_PhysicalChip/driverlib/Original|5_PhysicalChip/driverlib/Original/pruss.c|5_PhysicalChip/driverlib/Original/gpio_v2.c|5_PhysicalChip/driverlib/Original/hs_mmcsd.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>

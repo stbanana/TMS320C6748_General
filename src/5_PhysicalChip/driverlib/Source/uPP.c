@@ -74,6 +74,22 @@ void uPPPinMuxSetup(unsigned char OperatingMode)
 			break;
 		}
 
+		case uPP_CHB_16BIT:
+        {
+            savePinMux = HWREG(SOC_SYSCFG_0_REGS + SYSCFG0_PINMUX(14)) & ~(0xFFFFFF00); // ÅäÖÃUPP_D[10]~[15]
+            HWREG(SOC_SYSCFG_0_REGS + SYSCFG0_PINMUX(14)) |= (0x44444400 | savePinMux);
+
+            savePinMux = HWREG(SOC_SYSCFG_0_REGS + SYSCFG0_PINMUX(15)) & ~(0xFFFFFFFF); // ÅäÖÃUPP_D[2]~[9]
+            HWREG(SOC_SYSCFG_0_REGS + SYSCFG0_PINMUX(15)) |= (0x44444444 | savePinMux);
+
+            savePinMux = HWREG(SOC_SYSCFG_0_REGS + SYSCFG0_PINMUX(16)) & ~(0x000000FF); // ÅäÖÃUPP_D[0]~[1]
+            HWREG(SOC_SYSCFG_0_REGS + SYSCFG0_PINMUX(16)) |= (0x00000044 | savePinMux);
+
+            savePinMux = HWREG(SOC_SYSCFG_0_REGS + SYSCFG0_PINMUX(18)) & ~(0x00FFFF00);// ÅäÖÃUPP_CHB_WAIT¡¢ENABLE¡¢START¡¢CLOCK
+            HWREG(SOC_SYSCFG_0_REGS + SYSCFG0_PINMUX(18)) |= (0x00444400 | savePinMux);
+            break;
+        }
+
 		case uPP_CHA_8BIT_CHB_8BIT:
 		{
 			savePinMux = HWREG(SOC_SYSCFG_0_REGS + SYSCFG0_PINMUX(13)) & ~(0xFFFF0000);

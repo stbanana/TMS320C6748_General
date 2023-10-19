@@ -31,10 +31,11 @@
 // 详情参见 TMS320C6748 DSP Technical Reference Manual 1471页 表 31-3
 #define uPP_CHA_8BIT               (0x00000000u)
 #define uPP_CHA_16BIT              (0x00000001u)
-#define uPP_CHA_8BIT_CHB_8BIT      (0x00000002u)
-#define uPP_CHA_8BIT_CHB_16BIT     (0x00000003u)
-#define uPP_CHA_16BIT_CHB_8BIT     (0x00000004u)
-#define uPP_CHA_16BIT_CHB_16BIT    (0x00000005u)
+#define uPP_CHB_16BIT              (0x00000003u)
+#define uPP_CHA_8BIT_CHB_8BIT      (0x00000004u)
+#define uPP_CHA_8BIT_CHB_16BIT     (0x00000005u)
+#define uPP_CHA_16BIT_CHB_8BIT     (0x00000006u)
+#define uPP_CHA_16BIT_CHB_16BIT    (0x00000007u)
 
 // uPP 数据格式配置
 // 数据对齐方式

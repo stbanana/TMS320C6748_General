@@ -16,18 +16,18 @@
 #ifndef _MACRO_H_
 #define _MACRO_H_
 /*******************************************************************************
-                         define ARM port function
+                         define DSP port function
 *******************************************************************************/
 // System clock rate, 456 MHz
 // 时钟
 #define SYSCLK_1_FREQ       (456000000)
 #define SYSCLK_2_FREQ       (SYSCLK_1_FREQ/2)
 
-#define UART_2_FREQ         (SYSCLK_2_FREQ)
+#define UART_1_FREQ         (SYSCLK_2_FREQ)
 
 #define UPP_FREQ            (SYSCLK_2_FREQ)
 
 // 中断ID   1~3是芯片保留中断 14~15在Freertos中定义并占用
-#define C674X_MASK_UART2 C674X_MASK_INT4
+#define C674X_MASK_UART1 C674X_MASK_INT4
 
 #endif /*_MACRO_H_ */

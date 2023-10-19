@@ -97,6 +97,6 @@ void uPPRxTx(void)
 
     uPPRxTx_Read();
 
-    uPPRxTx_Write();
+//    uPPRxTx_Write();
 
 }

@@ -55,16 +55,31 @@
 void
 PinoutSet(void)
 {
+    GPIOBank0Pin1PinMuxSetup(); //GPIO0[1]
+    GPIOBank0Pin5PinMuxSetup(); //GPIO0[5]
+    GPIOBank0Pin8PinMuxSetup(); //GPIO0[8]
+    GPIOBank0Pin10PinMuxSetup(); //GPIO0[10]
+    GPIOBank0Pin12PinMuxSetup(); //GPIO0[12]
+    GPIOBank0Pin13PinMuxSetup(); //GPIO0[13]
+    GPIOBank0Pin15PinMuxSetup(); //GPIO0[15]
+    GPIOBank1Pin2PinMuxSetup();  //GPIO1[2]
+    GPIOBank1Pin15PinMuxSetup(); //GPIO1[15]
+    GPIOBank2Pin4PinMuxSetup(); //GPIO2[4]
+    GPIOBank6Pin1PinMuxSetup(); //GPIO6[1]
+    GPIOBank6Pin2PinMuxSetup(); //GPIO6[2]
+    GPIOBank6Pin3PinMuxSetup(); //GPIO6[3]
+    GPIOBank6Pin6PinMuxSetup(); //GPIO6[6]
+    GPIOBank6Pin7PinMuxSetup(); //GPIO6[7]
+    GPIOBank6Pin12PinMuxSetup(); //GPIO6[12]  LED_LIVE  核心板LED
+    GPIOBank6Pin13PinMuxSetup(); //GPIO6[13]
+    GPIOBank6Pin14PinMuxSetup(); //GPIO6[14]
+//    GPIOBank0Pin0PinMuxSetup(); // LED_LIVE  D7  GPIO0[0]
 
-//    GPIOPinTypeGPIOOutput(GPIO_PORTN_BASE, GPIO_PIN_0 ); // LED_LIVE
+    UARTPinMuxSetup(1, FALSE);//UART1系列pin口配置 禁用流控
 
-    GPIOBank6Pin12PinMuxSetup(); // LED_LIVE  核心板 GPIO6[12]
+    EMACPinMuxSetup(); // EMAC MII的pin口配置
 
-    GPIOBank0Pin0PinMuxSetup(); // LED_LIVE  D7  GPIO0[0]
-
-    UARTPinMuxSetup(2, FALSE);//UART2系列pin口配置 禁用流控
-
-    uPPPinMuxSetup(uPP_CHA_8BIT_CHB_8BIT);  //uPP配置为A通道8bit B通道8bit
+    uPPPinMuxSetup(uPP_CHB_16BIT);  //uPP配置为B通道16bit的pin口配置
 }
 
 //*****************************************************************************

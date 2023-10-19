@@ -5,6 +5,7 @@
 /*              2014年07月12日                                              */
 /*                                                                          */
 /****************************************************************************/
+#include <stdint.h>
 #include "hw_types.h"
 
 #include "PinMuxSetup.h"
@@ -33,11 +34,11 @@
 /*              管脚复用配置                                                */
 /*                                                                          */
 /****************************************************************************/
-void ECAPPinMuxSetup(unsigned char n)
+void ECAPPinMuxSetup(uint32_t ui32PortNum)
 {
-    unsigned int savePinmux = 0;
+    uint32_t savePinmux = 0;
 
-    if(n==0)
+    if(ui32PortNum==0)
     {
 		savePinmux = (HWREG(SOC_SYSCFG_0_REGS + SYSCFG0_PINMUX(2)) &
 					 ~(SYSCFG_PINMUX2_PINMUX2_31_28));
@@ -45,7 +46,7 @@ void ECAPPinMuxSetup(unsigned char n)
 		HWREG(SOC_SYSCFG_0_REGS + SYSCFG0_PINMUX(2)) =
 			 (PINMUX2_ECAP0_ENABLE | savePinmux);
     }
-    else if(n==1)
+    else if(ui32PortNum==1)
     {
 		savePinmux = (HWREG(SOC_SYSCFG_0_REGS + SYSCFG0_PINMUX(1)) &
 					 ~(SYSCFG_PINMUX1_PINMUX1_31_28));
@@ -53,7 +54,7 @@ void ECAPPinMuxSetup(unsigned char n)
 		HWREG(SOC_SYSCFG_0_REGS + SYSCFG0_PINMUX(1)) =
 			 (PINMUX1_ECAP1_ENABLE | savePinmux);
     }
-    else if(n==2)
+    else if(ui32PortNum==2)
     {
 		savePinmux = (HWREG(SOC_SYSCFG_0_REGS + SYSCFG0_PINMUX(1)) &
 					 ~(SYSCFG_PINMUX1_PINMUX1_3_0));
